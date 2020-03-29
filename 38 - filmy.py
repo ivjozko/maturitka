@@ -2,9 +2,7 @@ import re
 subor = open('nfilmov.txt','r').read()
 
 mena = re.findall(r'[A-z]+[ ][A-z]+[ ][A-z]+[ ][A-z]+[ ][A-z]+[ ][A-z]+|[A-z]+[ ][A-z]+[ ][A-z]+[ ][A-z]+|[A-z]+[ ][A-z]+|[A-z]+',subor)
-print(mena)
 cisla = re.findall(r'[0-9]+',subor)
-print(cisla)
 
 navs_arr = []
 film_arr = []
