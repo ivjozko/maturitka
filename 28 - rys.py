@@ -18,9 +18,10 @@ print(xka, yka)
 celkova = 0
 vela = 0
 for i in range(len(xka) - 1):
-    a = math.sqrt(((xka[i] - xka[i + 1]) ** 2) + ((yka[i] - yka[i + 1]) ** 2))
+    a = math.sqrt(((yka[i] - xka[i]) ** 2) + ((yka[i+1] - xka[i+1]) ** 2))
     celkova += a
     if a > vela:
         vela = a
         den = i + 1
-print(celkova, 'v den cislo:', den)
+print("Najvacsia vzdialenost",round(vela,2), 'v den cislo:', den)
+print("Celkova vzdialenost je",round(celkova,2))
