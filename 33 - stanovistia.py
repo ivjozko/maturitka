@@ -22,11 +22,11 @@ for i in range(len(pretekari)):
     if len(koberce) == 5:
         pass
     else:
-        print(pretekari[i],'to dojebal a netrafil stanovistia secky')
+        print(pretekari[i],' netrafil stanovistia vsetky')
         dojebky.append(i)
 
 for i in dojebky:
     pretekari.pop(i)
     casy.pop(i)
     stan.pop(i)
-print('fast boi je',pretekari[casy.index(min(casy))])
+print('vyhral',pretekari[casy.index(min(casy))])
