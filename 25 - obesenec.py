@@ -1,25 +1,35 @@
 import re
 import random
 
-subor = open('obesenec.txt','r').read()
-slova = re.findall(r'[A-z]+',subor)
-print(slova)
-slovo = random.choice(slova)
-print(slovo)
-hadane_slovo = ("-"*len(slovo))
-print("Zahrame si hru obesenec. Postupne hadaj pismena: ",hadane_slovo)
+f = open('obesenec.txt','r').read()
 
-for i in range(10):
-    pismeno = input()
-    if pismeno in slovo:
-        hodnota = slovo.find(pismeno)
-        hadane_slovo = list(hadane_slovo)
-        hadane_slovo[hodnota] = pismeno
-        print("super uhadol si pismeno, pokracuj", "".join(hadane_slovo))
-        if "-" not in hadane_slovo:
-            break
-            print("Gratulujem uhadol si slovo.")
-    else:
-        print("zle, toto pismeno sa tam nenachadza", "".join(hadane_slovo))
-if i == 9:
-    print("Neuhadol si slovo.")
+slova = re.findall(r'[A-z]+',f)
+slovo = random.choice(slova)
+print('-'*len(slovo),'\nHadaj slovo')
+
+zle = None
+win = False
+poc = 0
+hadane_slovo = [('-') for i in range(len(slovo))]
+
+while not win:
+    zle = True
+    inp = input()
+    for i in range(len(slovo)):
+        if str(inp) == str(slovo[i]):
+            hadane_slovo[i] = inp
+            zle = False
+
+    if zle:
+        poc += 1
+
+    for pis in hadane_slovo:
+        print(pis,end='')
+    print(' ',poc,'zlych pokusov')
+
+    if poc == 10:
+        print('Neuhadol si slovo!')
+        break
+    if '-' not in hadane_slovo:
+        print('Gratulujem uhadol si slovo!')
+        break
