@@ -10,7 +10,7 @@ import numpy as np
 grid = (np.reshape(cisla, (9, 10))).tolist()
 
 lst = []
-
+sizes = []
 import time
 
 
@@ -21,7 +21,7 @@ class island:
         self.area = 0
 
     def expanse(self):
-        global grid, lst
+        global grid, lst, sizes
         up = True
         down = True
         right = True
@@ -35,52 +35,55 @@ class island:
             next.append(self.y)
             next_copy = next
             while True:
+                next = []
                 for i in range(len(next_copy) // 2):
-                    next = []
+
                     self.x = next_copy[i * 2]
                     self.y = next_copy[2 * i + 1]
-                    if (str(self.x) + '_' + str(self.y)) not in lst:
-                        lst.append(str(self.x) + '_' + str(self.y))
-                        # check ci moze do stran
-                        if self.y == 0:
-                            right = False
-                        if self.y == len(grid[0]) - 1:
-                            left = False
-                        if self.x == 0:
-                            up = False
-                        if self.x == len(grid) - 1:
-                            down = False
-                        print(lst)
 
-                        # 4 okolo tile
-                        if left:
-                            if grid[self.x][self.y - 1] != 0 and (str(self.x) + '_' + str(self.y - 1)) not in lst:
-                                next.append(self.x)
-                                next.append(self.y - 1)
-                                self.area += 1
-                        if right:
-                            if grid[self.x][self.y + 1] != 0 and (str(self.x) + '_' + str(self.y + 1)) not in lst:
-                                next.append(self.x)
-                                next.append(self.y + 1)
-                                self.area += 1
-                        if up:
-                            if grid[self.x - 1][self.y] != 0 and (str(self.x - 1) + '_' + str(self.y)) not in lst:
-                                next.append(self.x - 1)
-                                next.append(self.y)
-                                self.area += 1
-                        if down:
-                            if grid[self.x + 1][self.y] != 0 and (str(self.x + 1) + '_' + str(self.y)) not in lst:
-                                next.append(self.x + 1)
-                                next.append(self.y)
-                                self.area += 1
+                    lst.append(str(self.x) + '_' + str(self.y))
+                    if self.y == 0:
+                        left = False
+                    if self.y == len(grid[0]) - 1:
+                        right = False
+                    if self.x == 0:
+                        up = False
+                    if self.x == len(grid) - 1:
+                        down = False
 
-                    time.sleep(1)
+                        # Getting next 4 tiles
+                    if left:
+                        if grid[self.x][self.y - 1] != 0 and (str(self.x) + '_' + str(self.y - 1)) not in lst:
+                            lst.append(str(self.x) + '_' + str(self.y - 1))
+                            next.append(self.x)
+                            next.append(self.y - 1)
+                            self.area += 1
+                    if right:
+                        if grid[self.x][self.y + 1] != 0 and (str(self.x) + '_' + str(self.y + 1)) not in lst:
+                            lst.append(str(self.x) + '_' + str(self.y + 1))
+                            next.append(self.x)
+                            next.append(self.y + 1)
+                            self.area += 1
+                    if up:
+                        if grid[self.x - 1][self.y] != 0 and (str(self.x - 1) + '_' + str(self.y)) not in lst:
+                            lst.append(str(self.x - 1) + '_' + str(self.y))
+                            next.append(self.x - 1)
+                            next.append(self.y)
+                            self.area += 1
+                    if down:
+                        if grid[self.x + 1][self.y] != 0 and (str(self.x + 1) + '_' + str(self.y)) not in lst:
+                            lst.append(str(self.x + 1) + '_' + str(self.y))
+                            next.append(self.x + 1)
+                            next.append(self.y)
+                            self.area += 1
+
+                    time.sleep(0.01)
                 next_copy = next
-                print(self.area, '\nnext:', next_copy)
-                if a == self.area:
+
+                if next == []:
                     break
-                else:
-                    a = self.area
+        if self.area != 0:
+            sizes.append(self.area)
 
 
 for row in range(len(grid)):
@@ -88,7 +91,8 @@ for row in range(len(grid)):
         if grid[row][element] != 0:
             isle = island(row, element)
             isle.expanse()
-            print('-------------')
+
+print('najvacsi ostrov ma rozlohu', max(sizes), 'a pocet ostrovov he', len(sizes))
 
 from tkinter import *
 
