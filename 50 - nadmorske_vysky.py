@@ -10,7 +10,6 @@ print('min:',min(hodnoty),'\nmax:',max(hodnoty),'\npriemer:',avr(hodnoty))
 
 hodnoty = numpy.reshape(hodnoty,(10,12))
 hodnoty = hodnoty.tolist()
-print(hodnoty)
 
 stredy1 = []
 stredy2 = []
