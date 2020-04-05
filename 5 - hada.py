@@ -1,24 +1,51 @@
 import re
-filee = open('hada.txt','r').read()
-new_file = re.sub(r'\n',' ',filee)
-lst = re.findall(r'[HDLP]+',new_file)
-print('pocet hier =',len(lst))
+
+f = open('hada.txt', 'r')
+filee = f.read()
+new_file = re.sub(r'\n', ' ', filee)
+lst = re.findall(r'[HDLP\.]+', new_file)
+print('pocet hier =', len(lst))
 c = 1
 mx = 0
 mxx = 0
 for game in lst:
+    print('hra c.', c, ' ma = ', len(game))
     if len(game) > mx:
         mx = len(game)
         mxx = c
-    c+=1
-print('najdlhsia hra =',mxx,' s poctom znakov =',mx)
-for i in lst:
-    h = re.findall(r'H',i)
-    d = re.findall(r'D',i)
-    l = re.findall(r'L',i)
-    p = re.findall(r'P',i)
-    hh = len(h)
-    dd = len(d)
-    ll = len(l)
-    pp = len(p)
-    print('H',hh,' D',dd,' P',pp,' L',ll)
+    c += 1
+print('najdlhsia hra = ', mxx, ' s poctom znakov = ', mx)
+lst2 = re.findall(r'[HDPL ]', new_file)
+arr = []
+counter = 1
+var = '  '
+vi = ''
+
+for i in lst2:
+    if var == i:
+        counter += 1
+    elif var == '  ':
+        var = i
+    elif var == ' ':
+        var = i
+        arr.append(' ')
+    else:
+        vi = ''
+        vi += var
+        vi += str(counter)
+        arr.append(vi)
+        var = i
+        counter = 1
+
+vi = ''
+vi += var
+vi += str(counter)
+arr.append(vi)
+
+strr = ''
+for i in arr:
+    if i == ' ':
+        strr += '\n'
+    else:
+        strr += i + ' '
+print(strr)
