@@ -7,4 +7,4 @@ for i in range (11):
         vacsie_ako_meter += 1
     print(i,":","%.2f" % vyska,"m")
     vyska = vyska*koeficient
-print(vacsie_ako_meter,"krat vyskocila vyssie ako 1 meter")
+print(vacsie_ako_meter - 1,"krat vyskocila vyssie ako 1 meter")
